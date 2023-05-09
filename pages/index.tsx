@@ -1,18 +1,24 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Thought from '../components/thought';
+import { ThoughtProps } from '../components/thought';
+import { useEffect, useState } from 'react';
 
 const Home: NextPage = () => {
-    const thoughts = [
-        {
-            createdAt: '2023-05-01T09:30:00',
-            content: 'This is my first thought wow!',
-        },
-        {
-            createdAt: '2023-05-01T10:15:00',
-            content: 'Another thought in my stream.',
-        },
-    ];
+    // keep track of a list of thoughts of type Thought as the state
+    // ThoughtProps is thought: {id, createdAt, content}
+    const [thoughts, setThoughts] = useState<ThoughtProps['thought'][]>([]);
+    // useEffect is a hook that runs when the component is mounted
+    // obtaining data from /api/thought, returned json with properties
+    // id, createdAt, and content
+    useEffect(() => {
+        fetch('/api/thought')
+            .then((response) => response.json())
+            .then((data) => {
+                setThoughts(data);
+            });
+    }, []);
+
 
     return (
         <div className="bg-white min-h-screen">

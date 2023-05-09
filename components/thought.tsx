@@ -1,7 +1,9 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 
-interface ThoughtProps {
+export interface ThoughtProps {
     thought: {
+        id: string;
         createdAt: string;
         content: string;
     };
@@ -16,7 +18,11 @@ const Thought: React.FC<ThoughtProps> = ({ thought }) => {
             <div className="w-1/2">
                 <div className="flex flex-row justify-start items-center mb-4">
                     <div className="text-gray-500 text-lg">{formattedDate}</div>
-                    <div className="text-black text-lg ml-4">{thought.content}</div>
+                    <div className="text-black text-lg ml-4">
+                        <ReactMarkdown className="prose">
+                            {thought.content}
+                        </ReactMarkdown>
+                    </div>
                 </div>
             </div>
         </div>
