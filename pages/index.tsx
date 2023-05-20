@@ -33,8 +33,8 @@ const Home: NextPage = () => {
                         <h1 className="text-4xl font-bold text-black mb-6">Sid&apos;s Stream</h1>
                     </div>
                 </div>
-                {thoughts.map((thought, index) => (
-                    <Thought key={index} thought={thought} />
+                {thoughts.slice().reverse().map((thought, index) => (
+                    <Thought key={thoughts.length - index - 1} thought={thought} />
                 ))}
             </div>
         </div>
